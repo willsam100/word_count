@@ -62,6 +62,8 @@ class WordCount
 	# add the new word to both the hashes
 	def updateWord(word)
 
+		word = remove_punctuation(word)
+
 		# If we have an entry then increment its count
 		if @a.has_key?(word)
 			@a[word] += 1
@@ -73,6 +75,13 @@ class WordCount
 		count = @a[word]
 		deleteWord(word, count)
 		addWord(word, count)
+	end
+
+	def remove_punctuation(word)
+		if word[-1] == '.' or word[',']
+			word = word[0..word.size-2]
+		end
+		return word
 	end
 
 
